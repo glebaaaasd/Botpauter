@@ -1,0 +1,18 @@
+from aiogram import Bot, Dispatcher, types
+import os
+
+bot = Bot(token=os.getenv("BOT_TOKEN"))
+dp = Dispatcher(bot)
+
+@dp.message_handler(commands=['start', 'help'])
+async def send_welcome(message: types.Message):
+    await message.answer("Привет! Это маркетплейс подарков через телеграм-бот.")
+
+@dp.message_handler(commands=['products'])
+async def send_products(message: types.Message):
+    products = [
+        "1. Плюшевая игрушка -- 1500₽",
+        "2. Подарочный сертификат -- 3000₽",
+        "3. Букет цветов -- 2500₽"
+    ]
+    await message.answer("\\n".join(products))
